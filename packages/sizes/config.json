@@ -1,0 +1,15 @@
+{
+  "source": ["./packages/sizes/sizes.tokens.json"],
+  "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "./packages/sizes/src/statics/scss/",
+      "files": [
+        {
+          "destination": "_sizes.scss",
+          "format": "scss/variables"
+        }
+      ]
+    }
+  }
+}

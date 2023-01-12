@@ -1,0 +1,15 @@
+{
+  "source": ["./packages/colors/colors.tokens.json"],
+  "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "./packages/colors/src/statics/scss/",
+      "files": [
+        {
+          "destination": "_colors.scss",
+          "format": "scss/variables"
+        }
+      ]
+    }
+  }
+}
