@@ -1,5 +1,5 @@
 ---
-@thiagomcasagrande/colors: major
+'@thiagomcasagrande/colors': major
 ---
 
 warn color update
