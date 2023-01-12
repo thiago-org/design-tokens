@@ -16,6 +16,7 @@
     "eslint-config-custom": "*",
     "json-to-ts": "^1.7.0",
     "prettier": "latest",
+    "style-dictionary": "^3.7.2",
     "turbo": "latest"
   },
   "engines": {
