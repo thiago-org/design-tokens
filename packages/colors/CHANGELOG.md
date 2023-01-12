@@ -1,5 +1,11 @@
 # @thiagomcasagrande/colors
 
+## 1.1.0
+
+### Minor Changes
+
+- 9bcac75: feat(colors): added the color red to represent dangerous actions
+
 ## 1.0.0
 
 ### Major Changes
