@@ -31,7 +31,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "sizes",
+  "name": "@thiagomcasagrande/sizes",
   "author": "Thiago",
   "module": "dist/sizes.esm.js",
   "size-limit": [
