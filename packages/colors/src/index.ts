@@ -1,4 +1,5 @@
 export const hello = 'world';
+export const test = 'test';
 
 export const sum = (a: number, b: number) => {
   if ('development' === process.env.NODE_ENV) {
