@@ -1,5 +1,11 @@
 # @thiagomcasagrande/colors
 
+## 2.0.0
+
+### Major Changes
+
+- 31aafed: feat(colors): removed success color
+
 ## 1.3.0
 
 ### Minor Changes
