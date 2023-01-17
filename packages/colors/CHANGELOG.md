@@ -1,5 +1,11 @@
 # @thiagomcasagrande/colors
 
+## 2.1.0
+
+### Minor Changes
+
+- 29f13b1: feat(colors): adding success color
+
 ## 2.0.0
 
 ### Major Changes
