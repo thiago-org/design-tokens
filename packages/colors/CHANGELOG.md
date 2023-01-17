@@ -1,5 +1,11 @@
 # @thiagomcasagrande/colors
 
+## 2.2.0
+
+### Minor Changes
+
+- 9360e43: feat(colors): added my color
+
 ## 2.1.0
 
 ### Minor Changes
