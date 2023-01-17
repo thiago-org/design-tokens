@@ -1,5 +1,11 @@
 # @thiagomcasagrande/colors
 
+## 1.3.0
+
+### Minor Changes
+
+- 62ad29f: fix(colors): Fixed success color tone
+
 ## 1.2.0
 
 ### Minor Changes
