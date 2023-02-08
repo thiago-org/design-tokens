@@ -1,0 +1,49 @@
+name: Generate
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  generate:
+    name: Generate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate files
+        run: npm run generate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Get Time
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          timeZone: 8
+          format: "YYYY-MM-DD-HH-mm-ss"
+
+      - name: Commit changes
+        env:
+          TIME: "${{ steps.time.outputs.time }}"
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "*"
+          message: $TIME
