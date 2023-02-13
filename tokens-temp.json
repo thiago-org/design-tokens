@@ -1,0 +1,78 @@
+{
+  "global": {},
+  "colors": {
+    "primary": {
+      "value": "#7100ff",
+      "type": "color"
+    },
+    "black": {
+      "value": "#222",
+      "type": "color"
+    },
+    "white": {
+      "value": "#fafafa",
+      "type": "color"
+    },
+    "gray": {
+      "200": {
+        "value": "#555",
+        "type": "color",
+        "description": "Desc"
+      }
+    },
+    "warn": {
+      "value": "#ff8801",
+      "type": "color"
+    },
+    "danger": {
+      "value": "#ff0d0d",
+      "type": "color"
+    },
+    "success": {
+      "value": "#00ea29",
+      "type": "color"
+    },
+    "my-color": {
+      "value": "#ff00e9",
+      "type": "color"
+    },
+    "my-new-color": {
+      "value": "#00ffb8",
+      "type": "color"
+    }
+  },
+  "sizes": {
+    "xs": {
+      "value": "8",
+      "type": "sizing"
+    },
+    "sm": {
+      "value": "12",
+      "type": "sizing"
+    },
+    "md": {
+      "value": "16",
+      "type": "sizing"
+    },
+    "lg": {
+      "value": "20",
+      "type": "sizing"
+    },
+    "xl": {
+      "value": "40",
+      "type": "sizing"
+    },
+    "xxl": {
+      "value": "80",
+      "type": "sizing"
+    }
+  },
+  "$themes": [],
+  "$metadata": {
+    "tokenSetOrder": [
+      "global",
+      "colors",
+      "sizes"
+    ]
+  }
+}
