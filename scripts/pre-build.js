@@ -2,13 +2,20 @@ const {
   getTokens,
   saveTokensAndTypes,
   runStyledDictionary,
-} = require('./functions');
+  saveTempTokensChanges,
+  deleteTempTokens,
+  generateChangeset,
+} = require("./functions");
 
-function main() {
+function preBuild() {
+  generateChangeset();
+  saveTempTokensChanges();
+  deleteTempTokens();
+
   const tokens = getTokens();
 
   saveTokensAndTypes(tokens);
   runStyledDictionary();
 }
 
-main();
+preBuild();
