@@ -2,18 +2,15 @@ const fs = require("fs");
 const process = require("process");
 const { exec } = require("child_process");
 
+const { diff } = require("deep-object-diff");
 const JsonToTS = require("json-to-ts");
 
 const ROOT = process.cwd();
 const TOKENS_PATH = `${ROOT}/tokens.json`;
+const TEMP_TOKENS_PATH = `${ROOT}/tokens-temp.json`;
 const PACKAGES_PATH = `${ROOT}/packages`;
 const PACKAGES = ["colors", "sizes"];
-
-function log(str) {
-  console.log("");
-  console.log("=============================================");
-  console.log(str);
-}
+const CHANGESET_PATH = `${ROOT}/.changeset`;
 
 function executeCommand(command) {
   exec(command, (error, stdout, stderr) => {
@@ -30,8 +27,6 @@ function executeCommand(command) {
 }
 
 function getTokens() {
-  log("1. Reading tokens.json");
-
   if (!fs.existsSync(TOKENS_PATH)) {
     throw new Error(`Tokens not found in ${TOKENS_PATH}`);
   }
@@ -39,8 +34,6 @@ function getTokens() {
 }
 
 function saveTokensAndTypes(tokens) {
-  log("2. Saving tokens into packages");
-
   const ignoreKeys = ["global", "$themes", "$metadata"];
 
   Object.keys(tokens).forEach((k) => {
@@ -63,8 +56,6 @@ function saveTokensAndTypes(tokens) {
 }
 
 function runStyledDictionary() {
-  log("3. Generating styles with Style Dictionary");
-
   PACKAGES.forEach((p) => {
     const configPath = `${PACKAGES_PATH}/${p}/config.json`;
     const command = `style-dictionary build --config ${configPath}`;
@@ -73,8 +64,6 @@ function runStyledDictionary() {
 }
 
 function copyStaticsToDist() {
-  log("4. Moving static files to dist");
-
   PACKAGES.forEach((p) => {
     const staticsPath = `${PACKAGES_PATH}/${p}/src/statics`;
     const staticsDistPath = `${PACKAGES_PATH}/${p}/dist`;
@@ -83,9 +72,49 @@ function copyStaticsToDist() {
   });
 }
 
+function _getChangesetPackages() {
+  const tokens = JSON.parse(fs.readFileSync(TOKENS_PATH));
+  const tempTokens = JSON.parse(fs.readFileSync(TEMP_TOKENS_PATH));
+  const diffObj = diff(tokens, tempTokens);
+
+  return Object.keys(diffObj).filter((k) => PACKAGES.includes(k));
+}
+
+function _changesetTemplate(packages, msg) {
+  return `
+---
+${packages.map((p) => `@thiagomcasagrande/${p}: major`).join("\n")}
+---
+
+${msg}
+  `;
+}
+
+function generateChangeset() {
+  const timestamp = new Date().getTime();
+  const changesetsPath = `${CHANGESET_PATH}/${timestamp}.md`;
+  const packages = _getChangesetPackages();
+
+  if (packages.length) {
+    const changeset = _changesetTemplate(packages, timestamp);
+    fs.writeFileSync(changesetsPath, JSON.stringify(changeset));
+  }
+}
+
+function saveTempTokensChanges() {
+  fs.copyFileSync(TEMP_TOKENS_PATH, TOKENS_PATH);
+}
+
+function deleteTempTokens() {
+  fs.unlinkSync(TEMP_TOKENS_PATH);
+}
+
 module.exports = {
   getTokens,
   saveTokensAndTypes,
   runStyledDictionary,
   copyStaticsToDist,
+  generateChangeset,
+  saveTempTokensChanges,
+  deleteTempTokens,
 };
